@@ -27,7 +27,7 @@ int main( int argc, char **argv ) {
 		std::cout << "Faild to create the game with error \"" << e.what() << "\"." << std::endl;
 	}
 
-	minesweeper->print();
+	minesweeper->startGame();
 
     return 0;
 

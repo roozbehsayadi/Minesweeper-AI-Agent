@@ -8,19 +8,30 @@
 #include <utility>
 #include <algorithm>
 
+#include "minesweepermonitor.h"
+
 class Minesweeper {
 
     private:
-        bool **grid;
+
+		const static int SAFE_SPACE_RADIUS_FOR_INITIALIZATION = 1;
+
+        bool **hasMine;
         int width, height, minesCount;
+
+        MinesweeperMonitor *monitor; 
+
+        void initializeRandomly( std::pair<int, int> = std::make_pair(-50, -50) );
+
 
     public:
         Minesweeper( int, int, int );
-
-        void initializeRandomly();
+        ~Minesweeper();
 
         std::string toString() const;
         void print() const;
+
+		void startGame();
 
 };
 
