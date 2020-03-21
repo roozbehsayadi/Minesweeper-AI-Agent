@@ -15,7 +15,7 @@ class MinesweeperMonitor {
 
     private:
 
-        SDL_Surface *undiscovered, *hovered, *question, *flag, *flag_hovered, *flag_red, *bomb_safe, *bomb_exploded;
+        SDL_Surface *undiscovered, *clicked, *hovered, *question, *flag, *flag_hovered, *flag_red, *bomb_safe, *bomb_exploded;
         SDL_Surface *discovereds[9];
 
         const static int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 600;

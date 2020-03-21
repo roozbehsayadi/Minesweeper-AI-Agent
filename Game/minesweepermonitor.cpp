@@ -18,6 +18,8 @@ MinesweeperMonitor::MinesweeperMonitor( int xCount, int yCount ) {
 
     this->undiscovered = IMG_Load( "assets/undiscovered_cell.png" );
     assert( this->undiscovered != NULL );
+    this->clicked = IMG_Load( "assets/box_clicked.png" );
+    assert( this->clicked != NULL );
     this->hovered = IMG_Load( "assets/hovered_cell.png" );
     assert( this->hovered != NULL );
     this->question = IMG_Load( "assets/question.png" );
