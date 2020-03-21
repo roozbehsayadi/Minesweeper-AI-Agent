@@ -12,3 +12,5 @@
 *.o
 .vscode/
 !makefile
+*.gch
+
