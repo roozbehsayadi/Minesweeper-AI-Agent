@@ -9,6 +9,7 @@
 #include <algorithm>
 
 #include "minesweepermonitor.h"
+#include "displaycell.h"
 
 class Minesweeper {
 
@@ -17,6 +18,7 @@ class Minesweeper {
 		const static int SAFE_SPACE_RADIUS_FOR_INITIALIZATION = 1;
 
         bool **hasMine;
+        DisplayCell **displayGrid; 
         int width, height, minesCount;
 
         MinesweeperMonitor *monitor; 
