@@ -20,7 +20,7 @@ Minesweeper::Minesweeper( int width, int height, int minesCount ) : width( width
 			displayGrid[i][j].setCellType( CellType::UNDISCOVERED );
 	}
 
-	monitor = new MinesweeperMonitor();
+	monitor = new MinesweeperMonitor( width, height );
 
 }
 

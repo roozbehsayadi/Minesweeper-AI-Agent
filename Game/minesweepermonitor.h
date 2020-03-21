@@ -21,11 +21,13 @@ class MinesweeperMonitor {
         const static int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 600;
         const static unsigned char backgroundColor[];
 
+        int cellWidth; 
+
         SDL_Surface *screen; 
 
     public:
 
-        MinesweeperMonitor();
+        MinesweeperMonitor( int, int );
         ~MinesweeperMonitor();
 
 };

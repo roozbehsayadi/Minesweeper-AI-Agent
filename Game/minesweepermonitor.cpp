@@ -6,7 +6,11 @@ const unsigned char MinesweeperMonitor::backgroundColor[] = { 242, 241, 240 };
 // SDL_Surface *const undiscovered, hovered, question, flag, flag_hovered, flag_red, bomb_safe, bomb_exploded;
 // SDL_Surface *const discovereds[9];
 
-MinesweeperMonitor::MinesweeperMonitor() {
+MinesweeperMonitor::MinesweeperMonitor( int xCount, int yCount ) {
+
+    if ( (double) WINDOW_WIDTH / xCount > (double) WINDOW_HEIGHT / yCount ) 
+        cellWidth = WINDOW_HEIGHT / yCount;
+    else cellWidth = WINDOW_WIDTH / xCount; 
 
     SDL_Init( SDL_INIT_EVERYTHING );
     screen = SDL_SetVideoMode( MinesweeperMonitor::WINDOW_WIDTH, MinesweeperMonitor::WINDOW_HEIGHT, 32, SDL_HWSURFACE );
