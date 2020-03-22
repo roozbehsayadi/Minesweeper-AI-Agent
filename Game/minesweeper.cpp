@@ -31,7 +31,7 @@ Minesweeper::~Minesweeper() {
 
 void Minesweeper::startGame() {
 
-	
+	monitor->showOnScreen( displayGrid );
 
 }
 

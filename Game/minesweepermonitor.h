@@ -7,13 +7,21 @@
 #include <sstream>
 #include <assert.h>
 
-#include "SDL/SDL.h"
-#include "SDL/SDL_image.h"
-#include "SDL/SDL_ttf.h"
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
+
+
+#include "displaycell.h"
+
+#include "SDLHandler.h"
+
 
 class MinesweeperMonitor {
 
     private:
+
+        void initGraphicStuff();
+        void loadSurfaces();
 
         SDL_Surface *undiscovered, *clicked, *hovered, *question, *flag, *flag_hovered, *flag_red, *bomb_safe, *bomb_exploded;
         SDL_Surface *discovereds[9];
@@ -23,12 +31,15 @@ class MinesweeperMonitor {
 
         int cellWidth; 
 
-        SDL_Surface *screen; 
+        SDL_Window *window = NULL; 
+        SDL_Surface *screenSurface = NULL; 
 
     public:
 
         MinesweeperMonitor( int, int );
         ~MinesweeperMonitor();
+
+        void showOnScreen( DisplayCell** );
 
 };
 

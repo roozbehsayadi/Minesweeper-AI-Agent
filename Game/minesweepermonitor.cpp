@@ -3,61 +3,67 @@
 
 const unsigned char MinesweeperMonitor::backgroundColor[] = { 242, 241, 240 };
 
-// SDL_Surface *const undiscovered, hovered, question, flag, flag_hovered, flag_red, bomb_safe, bomb_exploded;
-// SDL_Surface *const discovereds[9];
-
 MinesweeperMonitor::MinesweeperMonitor( int xCount, int yCount ) {
 
-    if ( (double) WINDOW_WIDTH / xCount > (double) WINDOW_HEIGHT / yCount ) 
-        cellWidth = WINDOW_HEIGHT / yCount;
-    else cellWidth = WINDOW_WIDTH / xCount; 
+	if ( (double) WINDOW_WIDTH / xCount > (double) WINDOW_HEIGHT / yCount ) 
+		cellWidth = WINDOW_HEIGHT / yCount;
+	else cellWidth = WINDOW_WIDTH / xCount; 
 
-    SDL_Init( SDL_INIT_EVERYTHING );
-    screen = SDL_SetVideoMode( MinesweeperMonitor::WINDOW_WIDTH, MinesweeperMonitor::WINDOW_HEIGHT, 32, SDL_HWSURFACE );
-    SDL_FillRect(screen, NULL, SDL_MapRGB( screen->format, backgroundColor[0], backgroundColor[1], backgroundColor[2]) );
+	this->initGraphicStuff();
 
-    this->undiscovered = IMG_Load( "assets/undiscovered_cell.png" );
-    assert( this->undiscovered != NULL );
-    this->clicked = IMG_Load( "assets/box_clicked.png" );
-    assert( this->clicked != NULL );
-    this->hovered = IMG_Load( "assets/hovered_cell.png" );
-    assert( this->hovered != NULL );
-    this->question = IMG_Load( "assets/question.png" );
-    assert( this->question != NULL );
-    this->flag = IMG_Load( "assets/flag.png" );
-    assert( this->flag != NULL );
-    this->flag_hovered = IMG_Load( "assets/flag_hovered.png" );
-    assert( this->flag_hovered != NULL );
-    this->flag_red = IMG_Load( "assets/flag_red.png" );
-    assert( this->flag_red != NULL );
-    this->bomb_safe = IMG_Load( "assets/bomb_safe.png" );
-    assert( this->bomb_safe != NULL );
-    this->bomb_exploded = IMG_Load( "assets/bomb_exploded.png" );
-    assert( this->bomb_exploded != NULL );
-    
-    for ( int i = 0; i < 10; i++ ) {
-        std::ostringstream ss;
-        ss << "assets/discovered_" << i << ".png";
-        this->discovereds[i] = IMG_Load( ss.str().c_str() );
-        assert( this->discovereds[i] != NULL );
-    }
+	this->loadSurfaces();
+	
+}
 
-    SDL_Flip( screen );
+void MinesweeperMonitor::showOnScreen( DisplayCell **displayGrid ) {
+	
+}
+
+void MinesweeperMonitor::loadSurfaces() {
+
+	this->undiscovered = SDLHandler::loadIMG( "assets/undiscovered_cell.png" ); 
+	this->clicked = SDLHandler::loadIMG( "assets/box_clicked.png" );
+	this->hovered = SDLHandler::loadIMG( "assets/hovered_cell.png" );
+	this->question = SDLHandler::loadIMG( "assets/question.png" );
+	this->flag = SDLHandler::loadIMG( "assets/flag.png" );
+	this->flag_hovered = SDLHandler::loadIMG( "assets/flag_hovered.png" );
+	this->flag_red = SDLHandler::loadIMG( "assets/flag_red.png" );
+	this->bomb_safe = SDLHandler::loadIMG( "assets/bomb_safe.png" );
+	this->bomb_exploded = SDLHandler::loadIMG( "assets/bombx_exploded.png" );
+
+	for ( int i = 0; i < 10; i++ ) {
+		std::ostringstream ss;
+		ss << "assets/discovered_" << i << ".png";
+		this->discovereds[i] = SDLHandler::loadIMG( ss.str().c_str() );
+	}
+
+}
+
+void MinesweeperMonitor::initGraphicStuff() {
+
+	SDLHandler::initSDL( SDL_INIT_EVERYTHING );
+	SDLHandler::initIMG( IMG_INIT_PNG );
+
+	this->window = SDLHandler::initWindow( "Minesweeper", WINDOW_WIDTH, WINDOW_HEIGHT );
+	screenSurface = SDL_GetWindowSurface( this->window );
+
 }
 
 MinesweeperMonitor::~MinesweeperMonitor() {
 
-    SDL_FreeSurface( this->undiscovered );
-    SDL_FreeSurface( this->hovered );
-    SDL_FreeSurface( this->question );
-    SDL_FreeSurface( this->flag );
-    SDL_FreeSurface( this->flag_hovered );
-    SDL_FreeSurface( this->flag_red );
-    SDL_FreeSurface( this->bomb_safe );
-    SDL_FreeSurface( this->bomb_exploded );
-    for ( int i = 0; i < 10; i++ ) 
-        SDL_FreeSurface( discovereds[i] );
+	SDL_FreeSurface( this->undiscovered );
+	SDL_FreeSurface( this->hovered );
+	SDL_FreeSurface( this->question );
+	SDL_FreeSurface( this->flag );
+	SDL_FreeSurface( this->flag_hovered );
+	SDL_FreeSurface( this->flag_red );
+	SDL_FreeSurface( this->bomb_safe );
+	SDL_FreeSurface( this->bomb_exploded );
+	for ( int i = 0; i < 10; i++ ) 
+	    SDL_FreeSurface( discovereds[i] );
 
-    SDL_Quit();
+	SDL_DestroyWindow( this->window );
+
+	SDL_Quit();
 
 }

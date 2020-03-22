@@ -30,7 +30,7 @@ class Minesweeper {
         Minesweeper( int, int, int );
         ~Minesweeper();
 
-        std::string toString() const;
+        std::string toString() const;   // TODO: must edit toString so it returns the shown grid, not the answers
         void print() const;
 
 		void startGame();
