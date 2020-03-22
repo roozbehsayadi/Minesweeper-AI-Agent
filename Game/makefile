@@ -1,5 +1,5 @@
 all: run
-	./main
+	gdb -q main
 run: main.o
 	g++ ./*.o -o main -Wall -g -O2 -std=c++11 -lSDL2 -lSDL2_image
 main.o: minesweeper.o main.cpp

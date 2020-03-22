@@ -6,6 +6,7 @@
 #include <string>
 #include <sstream>
 #include <assert.h>
+#include <math.h>
 
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
@@ -24,12 +25,12 @@ class MinesweeperMonitor {
         void loadSurfaces();
 
         SDL_Surface *undiscovered, *clicked, *hovered, *question, *flag, *flag_hovered, *flag_red, *bomb_safe, *bomb_exploded;
-        SDL_Surface *discovereds[9];
+        SDL_Surface *discovereds[10];
 
         const static int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 600;
         const static unsigned char backgroundColor[];
 
-        int cellWidth; 
+        int cellWidth, gridWidth, gridHeight; 
 
         SDL_Window *window = NULL; 
         SDL_Surface *screenSurface = NULL; 
@@ -39,7 +40,7 @@ class MinesweeperMonitor {
         MinesweeperMonitor( int, int );
         ~MinesweeperMonitor();
 
-        void showOnScreen( DisplayCell** );
+        void showOnScreen( DisplayCell**, int, int );
 
 };
 
