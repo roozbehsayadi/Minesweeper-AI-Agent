@@ -1,7 +1,7 @@
 
 #include "displaycellnumber.h"
 
-DisplayCellNumber::DisplayCellNumber( int number ) {
+DisplayCellNumber::DisplayCellNumber( CellType cellType, int number ) : DisplayCell( cellType ) {
 	this->number = number;
 }
 

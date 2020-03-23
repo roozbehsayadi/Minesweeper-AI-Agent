@@ -18,7 +18,7 @@ MinesweeperMonitor::MinesweeperMonitor( int xCount, int yCount ) {
 	
 }
 
-MouseClickEvent MinesweeperMonitor::showOnScreenAndReturnClick( DisplayCell **displayGrid, int xCount, int yCount ) {
+MouseClickEvent MinesweeperMonitor::showOnScreenAndReturnEvent( DisplayCell **displayGrid, int xCount, int yCount ) {
 
 	this->draw( displayGrid, xCount, yCount );
 
@@ -27,7 +27,9 @@ MouseClickEvent MinesweeperMonitor::showOnScreenAndReturnClick( DisplayCell **di
 	SDL_Event event;
 	while ( true ) {
 		while ( SDL_PollEvent( &event ) ) {
+			if ( event.type == SDL_QUIT ) {
 
+			}
 		}
 	}
 

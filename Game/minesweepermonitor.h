@@ -45,7 +45,7 @@ class MinesweeperMonitor {
         MinesweeperMonitor( int, int );
         ~MinesweeperMonitor();
 
-        MouseClickEvent showOnScreenAndReturnClick( DisplayCell**, int, int );
+        MouseClickEvent showOnScreenAndReturnEvent( DisplayCell**, int, int );
 
 };
 

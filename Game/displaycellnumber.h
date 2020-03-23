@@ -12,7 +12,7 @@ class DisplayCellNumber : public DisplayCell {
 
     public:
 
-        DisplayCellNumber( int );
+        DisplayCellNumber( CellType, int );
 
         virtual int getNumber() const override;
 
