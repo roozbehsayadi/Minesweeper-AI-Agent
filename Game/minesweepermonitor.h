@@ -13,6 +13,7 @@
 
 
 #include "displaycell.h"
+#include "mouseclickevent.h"
 
 #include "SDLHandler.h"
 
@@ -23,6 +24,8 @@ class MinesweeperMonitor {
 
         void initGraphicStuff();
         void loadSurfaces();
+
+        void draw( DisplayCell**, int, int );
 
         SDL_Surface *getSurfaceByCellType( DisplayCell ) const;
 
@@ -42,7 +45,7 @@ class MinesweeperMonitor {
         MinesweeperMonitor( int, int );
         ~MinesweeperMonitor();
 
-        void showOnScreen( DisplayCell**, int, int );
+        MouseClickEvent showOnScreenAndReturnClick( DisplayCell**, int, int );
 
 };
 

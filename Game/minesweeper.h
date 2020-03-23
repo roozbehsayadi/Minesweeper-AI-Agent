@@ -10,6 +10,7 @@
 
 #include "minesweepermonitor.h"
 #include "displaycell.h"
+#include "mouseclickevent.h"
 
 class Minesweeper {
 

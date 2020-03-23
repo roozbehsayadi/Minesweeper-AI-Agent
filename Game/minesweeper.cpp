@@ -26,13 +26,16 @@ Minesweeper::Minesweeper( int width, int height, int minesCount ) : width( width
 
 Minesweeper::~Minesweeper() {
 	delete[] hasMine; 
+	delete[] displayGrid;
 	delete monitor; 
 }
 
 void Minesweeper::startGame() {
 
+	MouseClickEvent clickEvent = monitor->showOnScreenAndReturnClick( displayGrid, width, height );
+
 	while ( true ) {
-		monitor->showOnScreen( displayGrid, width, height );
+		monitor->showOnScreenAndReturnClick( displayGrid, width, height );
 	}
 
 }

@@ -18,7 +18,22 @@ MinesweeperMonitor::MinesweeperMonitor( int xCount, int yCount ) {
 	
 }
 
-void MinesweeperMonitor::showOnScreen( DisplayCell **displayGrid, int xCount, int yCount ) {
+MouseClickEvent MinesweeperMonitor::showOnScreenAndReturnClick( DisplayCell **displayGrid, int xCount, int yCount ) {
+
+	this->draw( displayGrid, xCount, yCount );
+
+	SDL_UpdateWindowSurface( this->window );
+
+	SDL_Event event;
+	while ( true ) {
+		while ( SDL_PollEvent( &event ) ) {
+
+		}
+	}
+
+}
+
+void MinesweeperMonitor::draw( DisplayCell **displayGrid, int xCount, int yCount ) {
 
 	SDL_FillRect( this->screenSurface, NULL, SDL_MapRGB( this->screenSurface->format, backgroundColor[0], backgroundColor[1], backgroundColor[2] ) );
 
@@ -37,7 +52,6 @@ void MinesweeperMonitor::showOnScreen( DisplayCell **displayGrid, int xCount, in
 			SDL_BlitScaled( temp, NULL, this->screenSurface, &currentRect );
 		}
 	}
-	SDL_UpdateWindowSurface( this->window );
 
 }
 
