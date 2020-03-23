@@ -33,12 +33,28 @@ void MinesweeperMonitor::showOnScreen( DisplayCell **displayGrid, int xCount, in
 			currentRect.x = initialRect.x + i*cellWidth;
 			currentRect.y = initialRect.y + j*cellWidth;
 			currentRect.w = currentRect.h = cellWidth;
-			// std::cout << currentRect.x << ' ' << currentRect.y << ' ' << currentRect.w << ' ' << currentRect.h << std::endl;
-			SDL_BlitScaled( this->undiscovered, NULL, this->screenSurface, &currentRect );
+			SDL_Surface *temp = this->getSurfaceByCellType( displayGrid[j][i] );
+			SDL_BlitScaled( temp, NULL, this->screenSurface, &currentRect );
 		}
 	}
 	SDL_UpdateWindowSurface( this->window );
 
+}
+
+SDL_Surface *MinesweeperMonitor::getSurfaceByCellType( DisplayCell displayCell ) const {
+	if ( displayCell.getCellType() == CellType::UNDISCOVERED )
+		return this->undiscovered;
+	else if ( displayCell.getCellType() == CellType::EXPLODED_MINE )
+		return this->bomb_exploded;
+	else if ( displayCell.getCellType() == CellType::FLAG )
+		return this->flag;
+	else if ( displayCell.getCellType() == CellType::QUESTION )
+		return this->question;
+	else if ( displayCell.getCellType() == CellType::RED_FLAG )
+		return this->flag_red;
+	else if ( displayCell.getCellType() == CellType::NUMBER )
+		return this->discovereds[displayCell.getNumber()];
+	else throw "Error: Unknown cell type.";
 }
 
 void MinesweeperMonitor::loadSurfaces() {

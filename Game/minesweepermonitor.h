@@ -24,6 +24,8 @@ class MinesweeperMonitor {
         void initGraphicStuff();
         void loadSurfaces();
 
+        SDL_Surface *getSurfaceByCellType( DisplayCell ) const;
+
         SDL_Surface *undiscovered, *clicked, *hovered, *question, *flag, *flag_hovered, *flag_red, *bomb_safe, *bomb_exploded;
         SDL_Surface *discovereds[10];
 

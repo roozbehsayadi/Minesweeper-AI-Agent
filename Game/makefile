@@ -12,6 +12,8 @@ SDLHandler.o: SDLHandler.h SDLHandler.cpp
 	g++ -c SDLHandler.cpp 
 displaycell.o: celltype.o displaycell.h displaycell.cpp 
 	g++ -c displaycell.cpp 
+displaycellnumber.o: displaycell.o displaycellnumber.h displaycellnumber.cpp
+	g++ -c displaycellnumber.cpp 
 celltype.o: celltype.h
 	g++ -c celltype.h 
 clean: 
