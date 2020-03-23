@@ -12,13 +12,13 @@ class DisplayCell {
 
 	public:
 
-		const CellType &getCellType() const {
-			return cellType;
-		}
+		DisplayCell( CellType = CellType::UNDISCOVERED );
 
-		void setCellType( const CellType &cellType ) {
-			this->cellType = cellType;
-		}
+		virtual int getNumber() const;
+
+		const CellType &getCellType() const;
+
+		void setCellType( const CellType &cellType );
 
 };
 
