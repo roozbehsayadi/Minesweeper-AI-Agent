@@ -8,7 +8,7 @@ minesweeper.o: minesweepermonitor.o displaycell.o mouseclickevent.o minesweeper.
 	g++ -c minesweeper.cpp 
 mouseclickevent.o: event.o displaycell.o displaycellnumber.o mouseclickevent.h mouseclickevent.cpp
 	g++ -c mouseclickevent.cpp 
-minesweepermonitor.o: displaycell.o mouseclickevent.o SDLHandler.o minesweepermonitor.h minesweepermonitor.cpp
+minesweepermonitor.o: displaycell.o event.o exitevent.o mouseclickevent.o SDLHandler.o minesweepermonitor.h minesweepermonitor.cpp
 	g++ -c minesweepermonitor.cpp 
 SDLHandler.o: SDLHandler.h SDLHandler.cpp
 	g++ -c SDLHandler.cpp 

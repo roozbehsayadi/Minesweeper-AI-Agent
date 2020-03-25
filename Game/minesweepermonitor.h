@@ -13,7 +13,9 @@
 
 
 #include "displaycell.h"
+#include "event.h"
 #include "mouseclickevent.h"
+#include "exitevent.h"
 
 #include "SDLHandler.h"
 
@@ -29,6 +31,8 @@ class MinesweeperMonitor {
 
         SDL_Surface *getSurfaceByCellType( DisplayCell ) const;
 
+        std::pair<int, int> getCellCorFromClick( int, int ) const; 
+
         SDL_Surface *undiscovered, *clicked, *hovered, *question, *flag, *flag_hovered, *flag_red, *bomb_safe, *bomb_exploded;
         SDL_Surface *discovereds[10];
 
@@ -40,12 +44,14 @@ class MinesweeperMonitor {
         SDL_Window *window = NULL; 
         SDL_Surface *screenSurface = NULL; 
 
+        std::pair<int, int> boardTopLeftCor; 
+
     public:
 
         MinesweeperMonitor( int, int );
         ~MinesweeperMonitor();
 
-        MouseClickEvent showOnScreenAndReturnEvent( DisplayCell**, int, int );
+        Event* showOnScreenAndReturnEvent( bool**, DisplayCell**, int, int, bool*, bool* );
 
 };
 

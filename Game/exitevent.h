@@ -6,6 +6,18 @@
 
 class ExitEvent : public Event {
 
+    private:
+
+        bool *quit; 
+
+    public:
+
+        ExitEvent( bool* ); 
+
+        virtual void handleEvent() override; 
+
+        bool isUserQuit() const; 
+
 };
 
 #endif

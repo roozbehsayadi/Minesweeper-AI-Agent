@@ -32,10 +32,16 @@ Minesweeper::~Minesweeper() {
 
 void Minesweeper::startGame() {
 
-	MouseClickEvent clickEvent = monitor->showOnScreenAndReturnEvent( displayGrid, width, height );
+	bool lost = false, quit = false; 
+	Event *clickEvent = monitor->showOnScreenAndReturnEvent( this->hasMine, displayGrid, width, height, &lost, &quit );
+	clickEvent->handleEvent();
+	delete clickEvent;
 
-	while ( true ) {
-		monitor->showOnScreenAndReturnEvent( displayGrid, width, height );
+	while ( !quit ) {
+		clickEvent = monitor->showOnScreenAndReturnEvent( this->hasMine, displayGrid, width, height, &lost, &quit );
+		clickEvent->handleEvent();
+		// ...
+		delete clickEvent; 
 	}
 
 }

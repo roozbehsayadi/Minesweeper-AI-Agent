@@ -10,25 +10,30 @@ MinesweeperMonitor::MinesweeperMonitor( int xCount, int yCount ) {
 	else this->cellWidth = WINDOW_WIDTH / xCount; 
 
 	this->gridWidth = cellWidth * xCount;
-	this->gridHeight = cellWidth * yCount; 
+	this->gridHeight = cellWidth * yCount;
 
 	this->initGraphicStuff();
+	this->boardTopLeftCor = std::make_pair( (screenSurface->w - this->gridWidth) / 2, (screenSurface->h - this->gridHeight) / 2 );	
 
 	this->loadSurfaces();
 	
 }
 
-MouseClickEvent MinesweeperMonitor::showOnScreenAndReturnEvent( DisplayCell **displayGrid, int xCount, int yCount ) {
+Event* MinesweeperMonitor::showOnScreenAndReturnEvent( bool **hasMine, DisplayCell **displayGrid, int xCount, int yCount, bool *lost, bool *quit ) {
 
 	this->draw( displayGrid, xCount, yCount );
-
 	SDL_UpdateWindowSurface( this->window );
 
 	SDL_Event event;
 	while ( true ) {
 		while ( SDL_PollEvent( &event ) ) {
-			if ( event.type == SDL_QUIT ) {
-
+			if ( event.type == SDL_QUIT )
+				return new ExitEvent( quit );
+			else if ( event.type == SDL_MOUSEBUTTONDOWN ) {
+				MouseClickEvent::ClickType clickType = (event.button.button == SDL_BUTTON_LEFT) ? MouseClickEvent::ClickType::LEFT : MouseClickEvent::ClickType::RIGHT;
+				return new MouseClickEvent( hasMine, displayGrid, xCount, yCount, \
+											this->getCellCorFromClick( event.button.x, event.button.y ), \
+											clickType, lost);
 			}
 		}
 	}
@@ -40,8 +45,10 @@ void MinesweeperMonitor::draw( DisplayCell **displayGrid, int xCount, int yCount
 	SDL_FillRect( this->screenSurface, NULL, SDL_MapRGB( this->screenSurface->format, backgroundColor[0], backgroundColor[1], backgroundColor[2] ) );
 
 	SDL_Rect initialRect;
-	initialRect.x = (screenSurface->w - this->gridWidth) / 2;
-	initialRect.y = (screenSurface->h - this->gridHeight) / 2;
+	// initialRect.x = (screenSurface->w - this->gridWidth) / 2;
+	// initialRect.y = (screenSurface->h - this->gridHeight) / 2;
+	initialRect.x = this->boardTopLeftCor.first;
+	initialRect.y = this->boardTopLeftCor.second; 
 	initialRect.w = this->cellWidth;
 	initialRect.h = this->cellWidth;
 	for ( int i = 0; i < xCount; i++ ) {
@@ -55,6 +62,13 @@ void MinesweeperMonitor::draw( DisplayCell **displayGrid, int xCount, int yCount
 		}
 	}
 
+}
+
+std::pair<int, int> MinesweeperMonitor::getCellCorFromClick( int xClick, int yClick ) const {
+	std::pair<int, int> returnValue;
+	returnValue.first = (xClick - boardTopLeftCor.first) / cellWidth; 
+	returnValue.second = (yClick - boardTopLeftCor.second ) / cellWidth; 
+	return returnValue; 
 }
 
 SDL_Surface *MinesweeperMonitor::getSurfaceByCellType( DisplayCell displayCell ) const {
