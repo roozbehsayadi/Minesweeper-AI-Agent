@@ -27,9 +27,7 @@ class MinesweeperMonitor {
         void initGraphicStuff();
         void loadSurfaces();
 
-        void draw( DisplayCell**, int, int );
-
-        SDL_Surface *getSurfaceByCellType( DisplayCell ) const;
+        SDL_Surface *getSurfaceByCellType( DisplayCell* ) const;
 
         std::pair<int, int> getCellCorFromClick( int, int ) const; 
 
@@ -51,7 +49,8 @@ class MinesweeperMonitor {
         MinesweeperMonitor( int, int );
         ~MinesweeperMonitor();
 
-        Event* showOnScreenAndReturnEvent( bool**, DisplayCell**, int, int, bool*, bool* );
+        Event* showOnScreenAndReturnEvent( bool**, DisplayCell***, int, int, bool*, bool* );
+        void draw( DisplayCell***, int, int );
 
 };
 

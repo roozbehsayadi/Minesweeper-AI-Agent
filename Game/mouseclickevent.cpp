@@ -1,7 +1,7 @@
 
 #include "mouseclickevent.h"
 
-MouseClickEvent::MouseClickEvent( bool **hasMine, DisplayCell **displayGrid, int xCount, int yCount, std::pair<int, int> cor, ClickType clickType, bool *lost ) {
+MouseClickEvent::MouseClickEvent( bool **hasMine, DisplayCell ***displayGrid, int xCount, int yCount, std::pair<int, int> cor, ClickType clickType, bool *lost ) {
 	this->hasMine = hasMine;
 	this->displayGrid = displayGrid;
 	this->xCount = xCount;
@@ -14,15 +14,15 @@ MouseClickEvent::MouseClickEvent( bool **hasMine, DisplayCell **displayGrid, int
 void MouseClickEvent::handleEvent() { 
 
 	int x = cor.first, y = cor.second;
-	CellType cellType = displayGrid[y][x].getCellType();
+	CellType cellType = displayGrid[y][x]->getCellType();
 
 	if ( clickType == ClickType::RIGHT ) {
 		if ( cellType == CellType::FLAG ) 
-			displayGrid[y][x].setCellType( CellType::QUESTION );
+			displayGrid[y][x]->setCellType( CellType::QUESTION );
 		else if ( cellType == CellType::QUESTION ) 
-			displayGrid[y][x].setCellType( CellType::UNDISCOVERED );
+			displayGrid[y][x]->setCellType( CellType::UNDISCOVERED );
 		else if ( cellType == CellType::UNDISCOVERED )
-			displayGrid[y][x].setCellType( CellType::FLAG );
+			displayGrid[y][x]->setCellType( CellType::FLAG );
 	}
 	else if ( clickType == ClickType::LEFT ) 
 		if ( cellType == CellType::UNDISCOVERED || cellType == CellType::QUESTION )
@@ -34,14 +34,17 @@ void MouseClickEvent::revealCell() {
 
 	int x = cor.first, y = cor.second; 
 	if ( hasMine[y][x] ) {
-		displayGrid[y][x].setCellType( CellType::EXPLODED_MINE );
+		displayGrid[y][x]->setCellType( CellType::EXPLODED_MINE );
 		for ( int i = 0; i < xCount; i++ )
 			for ( int j = 0; j < yCount; j++ ) 
-				if ( displayGrid[j][i].getCellType() == CellType::FLAG && hasMine[j][i] )
-					displayGrid[j][i].setCellType( CellType::RED_FLAG );
+				if ( displayGrid[j][i]->getCellType() == CellType::FLAG && hasMine[j][i] )
+					displayGrid[j][i]->setCellType( CellType::RED_FLAG );
 		*lost = true;
 	}
-	else displayGrid[y][x] = DisplayCellNumber( CellType::NUMBER, this->adjacentMines() );
+	else {
+		delete displayGrid[y][x];
+		displayGrid[y][x] = new DisplayCellNumber( CellType::NUMBER, this->adjacentMines() );
+	}
 		// I calculate the number here, instead of somewhere that makes more sense. It is only temporary I will fix this later lol.
 
 }

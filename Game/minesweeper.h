@@ -19,7 +19,7 @@ class Minesweeper {
 		const static int SAFE_SPACE_RADIUS_FOR_INITIALIZATION = 1;
 
         bool **hasMine;
-        DisplayCell **displayGrid; 
+        DisplayCell ***displayGrid; 
         int width, height, minesCount;
 
         MinesweeperMonitor *monitor; 

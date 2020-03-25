@@ -13,11 +13,11 @@ Minesweeper::Minesweeper( int width, int height, int minesCount ) : width( width
 			hasMine[i][j] = false;
 	}
 
-	this->displayGrid = new DisplayCell*[ height ];
+	this->displayGrid = new DisplayCell**[ height ];
 	for ( int i = 0; i < height; i++ ) {
-		displayGrid[i] = new DisplayCell[ width ];
+		displayGrid[i] = new DisplayCell*[ width ];
 		for ( int j = 0; j < width; j++ )
-			displayGrid[i][j].setCellType( CellType::UNDISCOVERED );
+			displayGrid[i][j] = new DisplayCell( CellType::UNDISCOVERED );
 	}
 
 	monitor = new MinesweeperMonitor( width, height );
@@ -35,11 +35,13 @@ void Minesweeper::startGame() {
 	bool lost = false, quit = false; 
 	Event *clickEvent = monitor->showOnScreenAndReturnEvent( this->hasMine, displayGrid, width, height, &lost, &quit );
 	clickEvent->handleEvent();
+	monitor->draw( displayGrid, width, height );
 	delete clickEvent;
 
 	while ( !quit ) {
 		clickEvent = monitor->showOnScreenAndReturnEvent( this->hasMine, displayGrid, width, height, &lost, &quit );
 		clickEvent->handleEvent();
+		monitor->draw( displayGrid, width, height );
 		// ...
 		delete clickEvent; 
 	}

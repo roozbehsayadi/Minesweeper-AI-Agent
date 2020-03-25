@@ -19,7 +19,7 @@ MinesweeperMonitor::MinesweeperMonitor( int xCount, int yCount ) {
 	
 }
 
-Event* MinesweeperMonitor::showOnScreenAndReturnEvent( bool **hasMine, DisplayCell **displayGrid, int xCount, int yCount, bool *lost, bool *quit ) {
+Event* MinesweeperMonitor::showOnScreenAndReturnEvent( bool **hasMine, DisplayCell ***displayGrid, int xCount, int yCount, bool *lost, bool *quit ) {
 
 	this->draw( displayGrid, xCount, yCount );
 	SDL_UpdateWindowSurface( this->window );
@@ -40,7 +40,7 @@ Event* MinesweeperMonitor::showOnScreenAndReturnEvent( bool **hasMine, DisplayCe
 
 }
 
-void MinesweeperMonitor::draw( DisplayCell **displayGrid, int xCount, int yCount ) {
+void MinesweeperMonitor::draw( DisplayCell ***displayGrid, int xCount, int yCount ) {
 
 	SDL_FillRect( this->screenSurface, NULL, SDL_MapRGB( this->screenSurface->format, backgroundColor[0], backgroundColor[1], backgroundColor[2] ) );
 
@@ -71,19 +71,19 @@ std::pair<int, int> MinesweeperMonitor::getCellCorFromClick( int xClick, int yCl
 	return returnValue; 
 }
 
-SDL_Surface *MinesweeperMonitor::getSurfaceByCellType( DisplayCell displayCell ) const {
-	if ( displayCell.getCellType() == CellType::UNDISCOVERED )
+SDL_Surface *MinesweeperMonitor::getSurfaceByCellType( DisplayCell *displayCell ) const {
+	if ( displayCell->getCellType() == CellType::UNDISCOVERED )
 		return this->undiscovered;
-	else if ( displayCell.getCellType() == CellType::EXPLODED_MINE )
+	else if ( displayCell->getCellType() == CellType::EXPLODED_MINE )
 		return this->bomb_exploded;
-	else if ( displayCell.getCellType() == CellType::FLAG )
+	else if ( displayCell->getCellType() == CellType::FLAG )
 		return this->flag;
-	else if ( displayCell.getCellType() == CellType::QUESTION )
+	else if ( displayCell->getCellType() == CellType::QUESTION )
 		return this->question;
-	else if ( displayCell.getCellType() == CellType::RED_FLAG )
+	else if ( displayCell->getCellType() == CellType::RED_FLAG )
 		return this->flag_red;
-	else if ( displayCell.getCellType() == CellType::NUMBER )
-		return this->discovereds[displayCell.getNumber()];
+	else if ( displayCell->getCellType() == CellType::NUMBER ) 
+		return this->discovereds[displayCell->getNumber()];
 	else throw "Error: Unknown cell type.";
 }
 

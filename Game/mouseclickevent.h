@@ -2,6 +2,7 @@
 #ifndef __MOUSECLICKEVENT_H
 #define __MOUSECLICKEVENT_H
 
+#include <iostream>
 #include <utility>
 
 #include "event.h"
@@ -14,7 +15,7 @@ class MouseClickEvent : public Event {
 
 		enum ClickType{ LEFT, RIGHT };
 
-		MouseClickEvent( bool**, DisplayCell**, int, int, std::pair<int, int>, ClickType, bool* );
+		MouseClickEvent( bool**, DisplayCell***, int, int, std::pair<int, int>, ClickType, bool* );
 
 		virtual void handleEvent() override; 
 
@@ -24,7 +25,7 @@ class MouseClickEvent : public Event {
 		int adjacentMines() const; 
 
 		bool **hasMine; 
-		DisplayCell **displayGrid;
+		DisplayCell ***displayGrid;
 		int xCount, yCount; 
 
 		std::pair<int, int> cor;
