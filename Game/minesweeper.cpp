@@ -35,17 +35,17 @@ Minesweeper::~Minesweeper() {
 
 void Minesweeper::startGame() {
 
-	Event *event = monitor->showOnScreenAndReturnEvent( this );
-	event->handleEvent();
-	monitor->draw( displayGrid, width, height );
-	delete event;
+	Event *event;
 
-	while ( !quit ) {
+	while ( !quit && !lost ) {
 		event = monitor->showOnScreenAndReturnEvent( this );
 		event->handleEvent();
 		monitor->draw( displayGrid, width, height );
 		// ...
 		delete event; 
+	}
+	if ( this->lost ) {
+		SDL_Delay( 2000 );
 	}
 
 }

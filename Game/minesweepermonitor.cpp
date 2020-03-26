@@ -60,6 +60,8 @@ void MinesweeperMonitor::draw( DisplayCell ***displayGrid, int xCount, int yCoun
 		}
 	}
 
+	SDL_UpdateWindowSurface( this->window );
+
 }
 
 std::pair<int, int> MinesweeperMonitor::getCellCorFromClick( int xClick, int yClick ) const {

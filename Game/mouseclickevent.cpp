@@ -17,6 +17,9 @@ MouseClickEvent::MouseClickEvent( Minesweeper *minesweeper, std::pair<int, int> 
 
 void MouseClickEvent::handleEvent() { 
 
+	if ( this->minesweeper->lost )
+		return; 
+
 	int x = cor.first, y = cor.second;
 
 	if ( ! this->minesweeper->initialized )
