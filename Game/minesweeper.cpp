@@ -33,17 +33,17 @@ Minesweeper::~Minesweeper() {
 void Minesweeper::startGame() {
 
 	bool lost = false, quit = false; 
-	Event *clickEvent = monitor->showOnScreenAndReturnEvent( this->hasMine, displayGrid, width, height, &lost, &quit );
-	clickEvent->handleEvent();
+	Event *event = monitor->showOnScreenAndReturnEvent( this->hasMine, displayGrid, width, height, &lost, &quit );
+	event->handleEvent();
 	monitor->draw( displayGrid, width, height );
-	delete clickEvent;
+	delete event;
 
 	while ( !quit ) {
-		clickEvent = monitor->showOnScreenAndReturnEvent( this->hasMine, displayGrid, width, height, &lost, &quit );
-		clickEvent->handleEvent();
+		event = monitor->showOnScreenAndReturnEvent( this->hasMine, displayGrid, width, height, &lost, &quit );
+		event->handleEvent();
 		monitor->draw( displayGrid, width, height );
 		// ...
-		delete clickEvent; 
+		delete event; 
 	}
 
 }
