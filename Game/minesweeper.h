@@ -17,6 +17,7 @@ class MinesweeperMonitor;
 class Minesweeper {
 
     friend class MinesweeperMonitor; 
+    friend class MouseClickEvent; 
 
     private:
 
@@ -26,6 +27,7 @@ class Minesweeper {
         DisplayCell ***displayGrid; 
         int width, height, minesCount;
         bool quit, lost; 
+        bool initialized;
 
         MinesweeperMonitor *monitor; 
 

@@ -23,6 +23,7 @@ Minesweeper::Minesweeper( int width, int height, int minesCount ) : width( width
 	monitor = new MinesweeperMonitor( width, height );
 
 	this->quit = this->lost = false; 
+	this->initialized = false; 
 
 }
 
@@ -56,7 +57,6 @@ void Minesweeper::initializeRandomly( std::pair<int, int> clickPosition ) {
 		for ( int j = 0; j < height; j++ ) { 
 			if ( abs(i-clickPosition.first) <= SAFE_SPACE_RADIUS_FOR_INITIALIZATION && abs(j-clickPosition.second) <= SAFE_SPACE_RADIUS_FOR_INITIALIZATION )
 				continue;
-			std::cout << "HERE!" << std::endl;
 			allCors.push_back(std::make_pair( i, j ) );
 		}
 
@@ -66,6 +66,8 @@ void Minesweeper::initializeRandomly( std::pair<int, int> clickPosition ) {
 		auto current = allCors[i];
 		hasMine[current.second][current.first] = true;
 	}
+
+	this->initialized = true;
 
 }
 

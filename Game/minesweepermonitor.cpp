@@ -31,9 +31,7 @@ Event* MinesweeperMonitor::showOnScreenAndReturnEvent( Minesweeper *minesweeper 
 				return new ExitEvent( &(minesweeper->quit) );
 			else if ( event.type == SDL_MOUSEBUTTONDOWN ) {
 				MouseClickEvent::ClickType clickType = (event.button.button == SDL_BUTTON_LEFT) ? MouseClickEvent::ClickType::LEFT : MouseClickEvent::ClickType::RIGHT;
-				return new MouseClickEvent( minesweeper->hasMine, minesweeper->displayGrid, minesweeper->width, minesweeper->height, \
-											this->getCellCorFromClick( event.button.x, event.button.y ), \
-											clickType, &(minesweeper->lost));
+				return new MouseClickEvent( minesweeper, this->getCellCorFromClick( event.button.x, event.button.y ), clickType );
 			}
 		}
 	}

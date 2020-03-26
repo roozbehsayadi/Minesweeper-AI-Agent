@@ -8,6 +8,9 @@
 #include "event.h"
 #include "displaycell.h"
 #include "displaycellnumber.h"
+#include "minesweeper.h"
+
+class Minesweeper; 
 
 class MouseClickEvent : public Event {
 
@@ -15,7 +18,7 @@ class MouseClickEvent : public Event {
 
 		enum ClickType{ LEFT, RIGHT };
 
-		MouseClickEvent( bool**, DisplayCell***, int, int, std::pair<int, int>, ClickType, bool* );
+		MouseClickEvent( Minesweeper*, std::pair<int, int>, ClickType );
 
 		virtual void handleEvent() override; 
 
@@ -24,14 +27,17 @@ class MouseClickEvent : public Event {
 		void revealCell();
 		int adjacentMines() const; 
 
-		bool **hasMine; 
-		DisplayCell ***displayGrid;
-		int xCount, yCount; 
+		Minesweeper *minesweeper; 
+
+		// bool **hasMine; 
+		// DisplayCell ***displayGrid;
+		// int xCount, yCount; 
 
 		std::pair<int, int> cor;
 		MouseClickEvent::ClickType clickType; 
 
-		bool *lost; 
+		// bool *lost; 
+		// bool *initialized; 
 
 };
 
