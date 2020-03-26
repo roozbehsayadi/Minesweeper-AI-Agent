@@ -41,12 +41,24 @@ void Minesweeper::startGame() {
 		event = monitor->showOnScreenAndReturnEvent( this );
 		event->handleEvent();
 		monitor->draw( displayGrid, width, height );
-		// ...
+		if ( this->won() ) 
+			break; 
 		delete event; 
 	}
-	if ( this->lost ) {
-		SDL_Delay( 2000 );
-	}
+	if ( this->lost || ( !this->lost && !this->quit) )
+		SDL_Delay( 5000 );
+
+}
+
+bool Minesweeper::won() const {
+
+	int discoveredCount = 0;
+	for ( int i = 0; i < width; i++ )
+		for ( int j = 0; j < height; j++ )
+			if ( displayGrid[j][i]->getCellType() == CellType::NUMBER )
+				discoveredCount++; 
+		
+	return ( discoveredCount == width*height - minesCount );
 
 }
 

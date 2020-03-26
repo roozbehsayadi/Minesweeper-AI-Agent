@@ -32,6 +32,8 @@ class Minesweeper {
         MinesweeperMonitor *monitor; 
 
         void initializeRandomly( std::pair<int, int> = std::make_pair(-50, -50) );
+        
+        bool won() const;
 
 
     public:
