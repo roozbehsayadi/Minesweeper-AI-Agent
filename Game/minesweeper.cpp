@@ -22,6 +22,8 @@ Minesweeper::Minesweeper( int width, int height, int minesCount ) : width( width
 
 	monitor = new MinesweeperMonitor( width, height );
 
+	this->quit = this->lost = false; 
+
 }
 
 Minesweeper::~Minesweeper() {
@@ -32,14 +34,13 @@ Minesweeper::~Minesweeper() {
 
 void Minesweeper::startGame() {
 
-	bool lost = false, quit = false; 
-	Event *event = monitor->showOnScreenAndReturnEvent( this->hasMine, displayGrid, width, height, &lost, &quit );
+	Event *event = monitor->showOnScreenAndReturnEvent( this );
 	event->handleEvent();
 	monitor->draw( displayGrid, width, height );
 	delete event;
 
 	while ( !quit ) {
-		event = monitor->showOnScreenAndReturnEvent( this->hasMine, displayGrid, width, height, &lost, &quit );
+		event = monitor->showOnScreenAndReturnEvent( this );
 		event->handleEvent();
 		monitor->draw( displayGrid, width, height );
 		// ...

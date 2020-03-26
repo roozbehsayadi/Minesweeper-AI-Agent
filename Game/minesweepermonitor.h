@@ -12,6 +12,7 @@
 #include "SDL2/SDL_image.h"
 
 
+#include "minesweeper.h"
 #include "displaycell.h"
 #include "event.h"
 #include "mouseclickevent.h"
@@ -19,6 +20,7 @@
 
 #include "SDLHandler.h"
 
+class Minesweeper; 
 
 class MinesweeperMonitor {
 
@@ -49,7 +51,7 @@ class MinesweeperMonitor {
         MinesweeperMonitor( int, int );
         ~MinesweeperMonitor();
 
-        Event* showOnScreenAndReturnEvent( bool**, DisplayCell***, int, int, bool*, bool* );
+        Event* showOnScreenAndReturnEvent( Minesweeper* );
         void draw( DisplayCell***, int, int );
 
 };

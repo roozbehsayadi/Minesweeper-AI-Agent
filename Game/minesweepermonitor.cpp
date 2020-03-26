@@ -1,7 +1,7 @@
 
 #include "minesweepermonitor.h"
 
-const unsigned char MinesweeperMonitor::backgroundColor[] = { 232, 231, 230 };
+const unsigned char MinesweeperMonitor::backgroundColor[] = { 242, 241, 240 };
 
 MinesweeperMonitor::MinesweeperMonitor( int xCount, int yCount ) {
 
@@ -19,21 +19,21 @@ MinesweeperMonitor::MinesweeperMonitor( int xCount, int yCount ) {
 	
 }
 
-Event* MinesweeperMonitor::showOnScreenAndReturnEvent( bool **hasMine, DisplayCell ***displayGrid, int xCount, int yCount, bool *lost, bool *quit ) {
+Event* MinesweeperMonitor::showOnScreenAndReturnEvent( Minesweeper *minesweeper ) {
 
-	this->draw( displayGrid, xCount, yCount );
+	this->draw( minesweeper->displayGrid, minesweeper->width, minesweeper->height );
 	SDL_UpdateWindowSurface( this->window );
 
 	SDL_Event event;
 	while ( true ) {
 		while ( SDL_PollEvent( &event ) ) {
 			if ( event.type == SDL_QUIT )
-				return new ExitEvent( quit );
+				return new ExitEvent( &(minesweeper->quit) );
 			else if ( event.type == SDL_MOUSEBUTTONDOWN ) {
 				MouseClickEvent::ClickType clickType = (event.button.button == SDL_BUTTON_LEFT) ? MouseClickEvent::ClickType::LEFT : MouseClickEvent::ClickType::RIGHT;
-				return new MouseClickEvent( hasMine, displayGrid, xCount, yCount, \
+				return new MouseClickEvent( minesweeper->hasMine, minesweeper->displayGrid, minesweeper->width, minesweeper->height, \
 											this->getCellCorFromClick( event.button.x, event.button.y ), \
-											clickType, lost);
+											clickType, &(minesweeper->lost));
 			}
 		}
 	}

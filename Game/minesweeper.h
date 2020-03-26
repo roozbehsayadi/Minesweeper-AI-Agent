@@ -12,7 +12,11 @@
 #include "displaycell.h"
 #include "mouseclickevent.h"
 
+class MinesweeperMonitor; 
+
 class Minesweeper {
+
+    friend class MinesweeperMonitor; 
 
     private:
 
@@ -21,6 +25,7 @@ class Minesweeper {
         bool **hasMine;
         DisplayCell ***displayGrid; 
         int width, height, minesCount;
+        bool quit, lost; 
 
         MinesweeperMonitor *monitor; 
 
