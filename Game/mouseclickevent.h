@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <utility>
+#include <vector>
 
 #include "event.h"
 #include "displaycell.h"
@@ -24,20 +25,15 @@ class MouseClickEvent : public Event {
 
 	private:
 
-		void revealCell();
-		int adjacentMines() const; 
+		void revealCell( int, int );
+		void DFS( int, int );
+		std::vector<std::pair<int, int>> adjacentCors( int, int ) const; 
+		int adjacentMinesCount( int, int ) const; 
 
 		Minesweeper *minesweeper; 
 
-		// bool **hasMine; 
-		// DisplayCell ***displayGrid;
-		// int xCount, yCount; 
-
 		std::pair<int, int> cor;
 		MouseClickEvent::ClickType clickType; 
-
-		// bool *lost; 
-		// bool *initialized; 
 
 };
 
