@@ -45,7 +45,7 @@ void MouseClickEvent::revealCell() {
 		minesweeper->displayGrid[y][x]->setCellType( CellType::EXPLODED_MINE );
 		for ( int i = 0; i < minesweeper->width; i++ )
 			for ( int j = 0; j < minesweeper->height; j++ ) 
-				if ( minesweeper->displayGrid[j][i]->getCellType() == CellType::FLAG && minesweeper->hasMine[j][i] )
+				if ( minesweeper->displayGrid[j][i]->getCellType() == CellType::FLAG && !minesweeper->hasMine[j][i] )
 					minesweeper->displayGrid[j][i]->setCellType( CellType::RED_FLAG );
 		minesweeper->lost = true; 
 	}
