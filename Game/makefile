@@ -1,5 +1,5 @@
 all: run
-	gdb -q main
+	./main
 run: main.o minesweeper.o mouseclickevent.o minesweepermonitor.o SDLHandler.o displaycell.o displaycellnumber.o exitevent.o event.o 
 	g++ ./*.o -o main -Wall -g -O2 -std=c++11 -lSDL2 -lSDL2_image
 main.o: main.cpp
