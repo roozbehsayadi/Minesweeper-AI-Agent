@@ -6,15 +6,15 @@
 
 class DisplayCellNumber : public DisplayCell {
 
-    private:
+	private:
 
-        int number;
+		int number;
 
-    public:
+	public:
 
-        DisplayCellNumber( CellType, int );
+		DisplayCellNumber( CellType, int );
 
-        virtual int getNumber() const override;
+		virtual int getNumber() const override;
 
 };
 

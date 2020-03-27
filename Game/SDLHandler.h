@@ -10,14 +10,14 @@
 
 class SDLHandler {
 
-    public:
+	public:
 
-        static void initSDL( int );
-        static void initIMG( int );
-        static SDL_Window* initWindow( std::string, int, int );
+		static void initSDL( int );
+		static void initIMG( int );
+		static SDL_Window* initWindow( std::string, int, int );
 
-        static SDL_Surface* loadIMG( const char* );
-        static SDL_Surface* loadIMGOptimized( const char*, SDL_Surface* );
+		static SDL_Surface* loadIMG( const char* );
+		static SDL_Surface* loadIMGOptimized( const char*, SDL_Surface* );
 
 };
 

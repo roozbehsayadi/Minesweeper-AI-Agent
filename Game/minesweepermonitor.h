@@ -24,35 +24,35 @@ class Minesweeper;
 
 class MinesweeperMonitor {
 
-    private:
+	private:
 
-        void initGraphicStuff();
-        void loadSurfaces();
+		void initGraphicStuff();
+		void loadSurfaces();
 
-        SDL_Surface *getSurfaceByCellType( DisplayCell* ) const;
+		SDL_Surface *getSurfaceByCellType( DisplayCell* ) const;
 
-        std::pair<int, int> getCellCorFromClick( int, int ) const; 
+		std::pair<int, int> getCellCorFromClick( int, int ) const; 
 
-        SDL_Surface *undiscovered, *clicked, *hovered, *question, *flag, *flag_hovered, *flag_red, *bomb_safe, *bomb_exploded;
-        SDL_Surface *discovereds[10];
+		SDL_Surface *undiscovered, *clicked, *hovered, *question, *flag, *flag_hovered, *flag_red, *bomb_safe, *bomb_exploded;
+		SDL_Surface *discovereds[10];
 
-        const static int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 600;
-        const static unsigned char backgroundColor[];
+		const static int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 600;
+		const static unsigned char backgroundColor[];
 
-        int cellWidth, gridWidth, gridHeight; 
+		int cellWidth, gridWidth, gridHeight; 
 
-        SDL_Window *window = NULL; 
-        SDL_Surface *screenSurface = NULL; 
+		SDL_Window *window = NULL; 
+		SDL_Surface *screenSurface = NULL; 
 
-        std::pair<int, int> boardTopLeftCor; 
+		std::pair<int, int> boardTopLeftCor; 
 
-    public:
+	public:
 
-        MinesweeperMonitor( int, int );
-        ~MinesweeperMonitor();
+		MinesweeperMonitor( int, int );
+		~MinesweeperMonitor();
 
-        Event* showOnScreenAndReturnEvent( Minesweeper* );
-        void draw( DisplayCell***, int, int );
+		Event* showOnScreenAndReturnEvent( Minesweeper* );
+		void draw( DisplayCell***, int, int );
 
 };
 

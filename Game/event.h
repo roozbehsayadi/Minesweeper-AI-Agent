@@ -3,9 +3,9 @@
 #define __EVENT_H
 
 class Event { 
-    
-    public:
-        virtual void handleEvent() = 0;
+	
+	public:
+		virtual void handleEvent() = 0;
 
 };
 
