@@ -12,8 +12,10 @@ int main( int argc, char **argv ) {
 
 	std::pair<int, int> gridSize;
     int minesCount = 0;
-    if ( argc == 1 )
+    if ( argc == 1 ) {
+    	std::cout << "width, height and minesCount?" << std::endl;
         std::cin >> gridSize.first >> gridSize.second >> minesCount;
+    }
     else {
         gridSize = std::make_pair( std::stoi(argv[1]), std::stoi(argv[2]) );
         minesCount = std::stoi( argv[3] );
