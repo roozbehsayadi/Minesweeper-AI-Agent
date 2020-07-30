@@ -21,3 +21,5 @@ The most important files in this folder are:
 	-	We check if the user won the game. Losing is checked inside handleEvent. 
 
 	-	*event* variable is deleted since it was created in heap memory.
+
+-	**SDLHandler.h**: Initializations of SDL stuff are done with the static functions in this class. These are done automatically *Minesweeper* create a new monitor. 
