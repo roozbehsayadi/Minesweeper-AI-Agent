@@ -2,7 +2,7 @@ This project has two different parts. First one is a good, old minesweeper game,
 
 # Installing requirements
 
-```sudo apt install libsdl.2-dev libsd-image1.2-dev ```
+```sudo apt install libsdl2-dev libsd2-image-dev ```
 
 # Execuing program
 For executing the game, go to the Game folder and run ```make``` command. You will be asked for width, height and number of mines in the game. Then the game will start. 
