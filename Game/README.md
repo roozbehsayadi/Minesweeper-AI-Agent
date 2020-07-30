@@ -22,4 +22,4 @@ The most important files in this folder are:
 
 	-	*event* variable is deleted since it was created in heap memory.
 
--	**SDLHandler.h**: Initializations of SDL stuff are done with the static functions in this class. These are done automatically *Minesweeper* create a new monitor. 
+-	**SDLHandler.h**: Initializations of SDL stuff are done with the static functions in this class. These are done automatically when *Minesweeper* create a new monitor. 
